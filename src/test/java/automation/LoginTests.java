@@ -22,6 +22,14 @@ public class LoginTests extends BaseTest {
     }
 
     @Test(groups = {regression, smoke})
+    @Description("Se verifica la integridad de la pagina de login")
+    @Severity(SeverityLevel.BLOCKER)
+    public void verifyLoginPage(){
+        Logs.info("Se verifica la pagina de login");
+        loginPage.verifyPage();
+    }
+
+    @Test(groups = {regression, smoke})
     @Description("Se verifica que aparezca un mensaje de error al hace login con un usuario invalido")
     @Severity(SeverityLevel.CRITICAL)
     public void lockedOutUserTest() {
