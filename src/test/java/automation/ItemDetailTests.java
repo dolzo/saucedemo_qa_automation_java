@@ -1,5 +1,8 @@
 package automation;
 
+import io.qameta.allure.Severity;
+import io.qameta.allure.SeverityLevel;
+import jdk.jfr.Description;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import pages.ItemDetailPage;
@@ -27,12 +30,13 @@ public class ItemDetailTests extends BaseTest {
         shoppingPage.waitPageToLoad(); // Se espera a que cargue la pagina de shopping
     }
 
-    @Test
+    @Test(groups = {regression})
+    @Description("Se verifican los elementos de la pagina de un producto")
+    @Severity(SeverityLevel.CRITICAL)
     public void verifyItemDetailTest() {
         shoppingPage.goToItemDetail("Sauce Labs Fleece Jacket");
         itemDetailPage.waitPageToLoad();
 
         itemDetailPage.verifyPage();
-
     }
 }
