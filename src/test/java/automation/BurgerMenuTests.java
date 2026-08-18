@@ -1,6 +1,8 @@
 package automation;
 
 import io.qameta.allure.Description;
+import io.qameta.allure.Severity;
+import io.qameta.allure.SeverityLevel;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import pages.BurgerMenu;
@@ -35,6 +37,7 @@ public class BurgerMenuTests extends BaseTest {
 
     @Test(groups = {smoke, regression})
     @Description("Se verifica el correcto funcionamiento del boton para cerrar sesion")
+    @Severity(SeverityLevel.CRITICAL)
     public void logoutTest() {
 
         burgerMenu.logoutButtonClick();
