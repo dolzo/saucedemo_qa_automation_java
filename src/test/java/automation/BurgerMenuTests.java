@@ -45,4 +45,13 @@ public class BurgerMenuTests extends BaseTest {
         loginPage.verifyPage();
 
     }
+
+    @Test(groups = {regression})
+    @Description("Se verifica que el link del boton about sea correcto")
+    @Severity(SeverityLevel.MINOR)
+    public void verifyLinkAboutButton(){
+
+        burgerMenu.verifyAboutButtonUrl("https://saucelabs.com/");
+
+    }
 }
