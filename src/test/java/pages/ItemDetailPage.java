@@ -35,4 +35,10 @@ public class ItemDetailPage extends BasePage {
 
         softAssert.assertAll();
     }
+
+    @Step("Haciendo clic en back to products")
+    public void clickBackToProducts(){
+        Logs.info("Haciendo clic en back to products");
+        find(backToProductsButton).click();
+    }
 }

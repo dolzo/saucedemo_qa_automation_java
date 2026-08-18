@@ -39,4 +39,17 @@ public class ItemDetailTests extends BaseTest {
 
         itemDetailPage.verifyPage();
     }
+
+    @Test(groups = {regression, smoke})
+    @Description("Se verifican el funcionamiento del boton 'Back to products'")
+    @Severity(SeverityLevel.CRITICAL)
+    public void verifyBackToProductsButton() {
+        shoppingPage.goToItemDetail("Sauce Labs Fleece Jacket");
+        itemDetailPage.waitPageToLoad();
+
+        itemDetailPage.clickBackToProducts();
+        shoppingPage.waitPageToLoad();
+        shoppingPage.verifyPage();
+
+    }
 }
