@@ -26,16 +26,13 @@ public class BaseTest {
 
     // protected Faker faker;
 
-    protected SoftAssert softAssert;
     protected Faker faker;
     protected static final String regression = "regression";
     protected static final String smoke = "smoke";
     protected WebDriver driver;
-    protected WebDriverWait wait;
 
     @BeforeMethod(alwaysRun = true)
     public void masterSetUp() {
-        softAssert = new SoftAssert();
         faker = new Faker();
 
         Logs.debug("Creando opciones personalizadas para el Webdriver");
@@ -75,14 +72,5 @@ public class BaseTest {
 
     }
 
-    // ESTE METODO ES UNA MALA PRACTICA Y DEBE SER ERRADICADO --- USO SOLO PARA DEBUG
-    protected void sleep(int timeMs){
-        try {
-            Thread.sleep(timeMs);
-        }catch (InterruptedException interruptedException){
-            Logs.error("InterruptedException: %s",
-                    interruptedException.getLocalizedMessage());
-        }
-    }
 
 }
