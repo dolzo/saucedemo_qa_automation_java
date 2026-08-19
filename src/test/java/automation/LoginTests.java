@@ -15,10 +15,7 @@ public class LoginTests extends BaseTest {
 
     @BeforeMethod(alwaysRun = true)
     public void setUp() {
-        Logs.info("Navegando a la pagina");
-        driver.get("https://www.saucedemo.com/");
-
-        loginPage.waitPageToLoad(); // Se espera a que cargue la pagina
+        commonFlows.goToLoginPage();
     }
 
     @Test(groups = {regression, smoke})

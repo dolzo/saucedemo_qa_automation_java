@@ -13,23 +13,11 @@ import utilities.Logs;
 
 public class FooterTests extends BaseTest {
 
-    private final LoginPage loginPage = new LoginPage();
-    private final ShoppingPage shoppingPage = new ShoppingPage();
     private final Footer footer = new Footer();
 
     @BeforeMethod(alwaysRun = true)
     public void setUp() {
-
-        Logs.info("Navegando a la pagina");
-        driver.get("https://www.saucedemo.com/");
-
-        loginPage.waitPageToLoad(); // Se espera a que cargue la pagina de login
-
-        Logs.info("Se hace login");
-        loginPage.fillLoginForm("standard_user", "secret_sauce");
-
-        shoppingPage.waitPageToLoad(); // Se espera a que cargue la pagina de shopping
-
+        commonFlows.goToShoppingPage();
     }
 
     @Test(groups = {regression})

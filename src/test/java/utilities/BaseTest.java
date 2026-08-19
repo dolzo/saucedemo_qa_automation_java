@@ -26,10 +26,11 @@ public class BaseTest {
 
     // protected Faker faker;
 
-    protected Faker faker;
+    protected WebDriver driver;
     protected static final String regression = "regression";
     protected static final String smoke = "smoke";
-    protected WebDriver driver;
+    protected CommonFlows commonFlows = new CommonFlows();
+    protected Faker faker;
 
     @BeforeMethod(alwaysRun = true)
     public void masterSetUp() {
