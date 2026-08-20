@@ -1,5 +1,6 @@
 package utilities;
 
+import data.DataGiver;
 import org.openqa.selenium.WebDriver;
 import pages.*;
 
@@ -19,8 +20,13 @@ public class CommonFlows {
     public void goToShoppingPage(){
         goToLoginPage();
 
+        final var standardCredentials = DataGiver.getValidCredentials();
+
         Logs.info("Se hace login");
-        new LoginPage().fillLoginForm("standard_user", "secret_sauce");
+        new LoginPage().fillLoginForm(
+                standardCredentials.getUsername(),
+                standardCredentials.getPassword()
+        );
 
         new ShoppingPage().waitPageToLoad(); // Se espera a que cargue la pagina de shopping
     }

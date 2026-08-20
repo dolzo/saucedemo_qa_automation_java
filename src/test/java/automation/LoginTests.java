@@ -1,5 +1,6 @@
 package automation;
 
+import data.DataGiver;
 import io.qameta.allure.Description;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
@@ -30,9 +31,12 @@ public class LoginTests extends BaseTest {
     @Description("Se verifica que aparezca un mensaje de error al hace login con un usuario invalido")
     @Severity(SeverityLevel.CRITICAL)
     public void lockedOutUserTest() {
+        final var lockedCredentials = DataGiver.getLockedCredentials();
+        loginPage.fillLoginForm(
+                lockedCredentials.getUsername(),
+                lockedCredentials.getPassword());
 
-        loginPage.fillLoginForm("locked_out_user", "secret_sauce");
-        loginPage.verifyErrorMessage("Epic sadface: Sorry, this user has been locked out.");
+        loginPage.verifyErrorMessage(lockedCredentials.getMessage());
 
     }
 }
