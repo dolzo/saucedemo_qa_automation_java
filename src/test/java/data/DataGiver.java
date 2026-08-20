@@ -16,9 +16,12 @@ public class DataGiver {
         return getCredentialsMap().get("valid");
     }
 
-
     public static Credential getLockedCredentials(){
         return getCredentialsMap().get("locked");
+    }
+
+    public static Credential getUnexistentCredentials(){
+        return getCredentialsMap().get("unexistent");
     }
 
 }
