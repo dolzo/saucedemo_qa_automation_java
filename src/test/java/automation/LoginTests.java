@@ -1,11 +1,9 @@
 package automation;
 
-import data.DataGiver;
+import data.CustomDataProviders;
 import io.qameta.allure.Description;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import pages.LoginPage;
@@ -14,7 +12,6 @@ import utilities.Logs;
 
 public class LoginTests extends BaseTest {
 
-    private static final Logger log = LoggerFactory.getLogger(LoginTests.class);
     private final LoginPage loginPage = new LoginPage();
 
     @BeforeMethod(alwaysRun = true)
@@ -30,28 +27,15 @@ public class LoginTests extends BaseTest {
         loginPage.verifyPage();
     }
 
-    @Test(groups = {regression})
-    @Description("Se verifica que aparezca un mensaje de error al hace login con un usuario invalido")
+    @Test(
+            groups = {regression},
+            dataProviderClass = CustomDataProviders.class,
+            dataProvider = CustomDataProviders.DP_CREDENTIALS
+    )
+    @Description("Se verifica que aparezca un mensaje de error al hace login con un usuario que no es valido")
     @Severity(SeverityLevel.CRITICAL)
-    public void lockedOutUserTest() {
-        final var lockedCredentials = DataGiver.getLockedCredentials();
-        loginPage.fillLoginForm(
-                lockedCredentials.getUsername(),
-                lockedCredentials.getPassword());
-
-        loginPage.verifyErrorMessage(lockedCredentials.getMessage());
-
-    }
-
-    @Test(groups = {regression})
-    @Description("Se verifica que aparezca un mensaje de error al hace login con un usuario que no se encuentre registrado")
-    @Severity(SeverityLevel.CRITICAL)
-    public void unexistentUserTest(){
-        final var unexistentCredentials = DataGiver.getUnexistentCredentials();
-        loginPage.fillLoginForm(
-                unexistentCredentials.getUsername(),
-                unexistentCredentials.getPassword()
-        );
-        loginPage.verifyErrorMessage(unexistentCredentials.getMessage());
+    public void credentialsTest(String username, String password, String message){
+        loginPage.fillLoginForm(username, password);
+        loginPage.verifyErrorMessage(message);
     }
 }
