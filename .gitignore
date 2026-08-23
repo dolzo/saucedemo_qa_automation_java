@@ -60,5 +60,7 @@ allure-report/
 
 *.log
 src/test/resources/logs/*.log
+src/test/resources/pageStructure/*
+src/test/resources/screenshots/*
 
 Thumbs.db
