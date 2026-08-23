@@ -31,6 +31,22 @@ public class CommonFlows {
         new ShoppingPage().waitPageToLoad(); // Se espera a que cargue la pagina de shopping
     }
 
+    public void goToShoppingCartPage(){
+        goToShoppingPage();
+
+        new TopBar().clickCartButton();
+
+        new ShoppingCartPage().waitPageToLoad();
+    }
+
+    public void goToYourInformationPage(){
+        goToShoppingCartPage();
+
+        new ShoppingCartPage().clickCheckoutButton();
+
+        new YourInformationPage().waitPageToLoad();
+    }
+
     public void openBurgerMenu(){
         goToShoppingPage();
 
