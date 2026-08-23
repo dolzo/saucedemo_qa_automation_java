@@ -9,6 +9,7 @@ public class TopBar extends BasePage {
 
     private final By title = By.className("app_logo");
     private final By burgerMenu = By.id("react-burger-menu-btn");
+    private final By shoppingCart = By.cssSelector("a[data-test='shopping-cart-link']");
 
     // En blanco porque depende de la pagina en donde uno se encuentre
     @Override
@@ -30,4 +31,9 @@ public class TopBar extends BasePage {
         find(burgerMenu).click();
     }
 
+    @Step("Abriendo el carrito")
+    public void clickCartButton(){
+        Logs.info("Abriendo el carrito");
+        find(shoppingCart).click();
+    }
 }
