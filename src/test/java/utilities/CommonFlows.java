@@ -1,6 +1,7 @@
 package utilities;
 
 import data.DataGiver;
+import org.openqa.selenium.Cookie;
 import org.openqa.selenium.WebDriver;
 import pages.*;
 
@@ -8,6 +9,15 @@ public class CommonFlows {
 
     private WebDriver getDriver(){
         return new WebDriverProvider().get();
+    }
+
+    public void assignLoginCookie(){
+        Logs.debug("Asignando cookie de login");
+        getDriver().get("https://www.saucedemo.com/404"); // esta pagina la uso solo para asignar la cookie
+        final var credencialesValidas = DataGiver.getValidCredentials();
+        final var loginCookie =
+                new Cookie("session-username", credencialesValidas.getUsername());
+        getDriver().manage().addCookie(loginCookie);
     }
 
     public void goToLoginPage(){
