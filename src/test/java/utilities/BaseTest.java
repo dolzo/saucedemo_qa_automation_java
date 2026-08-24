@@ -26,51 +26,21 @@ public class BaseTest {
 
     // protected Faker faker;
 
-    protected WebDriver driver;
     protected static final String regression = "regression";
     protected static final String smoke = "smoke";
     protected CommonFlows commonFlows = new CommonFlows();
     protected Faker faker;
+    private final DriverManager driverManager = new DriverManager();
 
     @BeforeMethod(alwaysRun = true)
     public void masterSetUp() {
         faker = new Faker();
-
-        Logs.debug("Creando opciones personalizadas para el Webdriver");
-        final Map<String, Object> chromePrefs = new HashMap<>();
-        chromePrefs.put("credentials_enable_service", false);
-        chromePrefs.put("profile.password_manager_enabled", false);
-        chromePrefs.put("profile.password_manager_leak_detection", false); // <======== This is the important one
-
-        final ChromeOptions chromeOptions = new ChromeOptions();
-        chromeOptions.setExperimentalOption("prefs", chromePrefs);
-        chromeOptions.setCapability(CapabilityType.ACCEPT_INSECURE_CERTS, true);
-
-        Logs.debug("Inicializando Selenium Webdriver con opciones personalizadas");
-        driver = new ChromeDriver(chromeOptions);
-
-        Logs.debug("Maximizando la pantalla del navegador");
-        driver.manage().window().maximize();
-
-        Logs.debug("Borrando cookies del navegador");
-        driver.manage().deleteAllCookies();
-
-        // Logs.debug("Asignando un implicit wait de 5 segundos");
-        // driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
-
-        Logs.debug("Asignando driver al webdriver provider");
-        new WebDriverProvider().set(driver);
-
-        // Esto es para ignorar las advertencias de nuevas versiones de selenium
-        Logger.getLogger("org.openqa.selenium.devtools.CdpVersionFinder").setLevel(Level.OFF);
+        driverManager.buildDriver();
     }
 
     @AfterMethod(alwaysRun = true)
     public void masterTearDown() {
-
-        Logs.debug("Cerrando Selenium Webdriver");
-        driver.quit();
-
+        driverManager.killDriver();
     }
 
 
