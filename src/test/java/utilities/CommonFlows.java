@@ -11,7 +11,7 @@ public class CommonFlows {
         return new WebDriverProvider().get();
     }
 
-    public void assignLoginCookie(){
+    private void assignLoginCookie(){
         Logs.debug("Asignando cookie de login");
         getDriver().get("https://www.saucedemo.com/404"); // esta pagina la uso solo para asignar la cookie
         final var credencialesValidas = DataGiver.getValidCredentials();
