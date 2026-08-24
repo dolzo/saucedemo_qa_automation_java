@@ -28,15 +28,8 @@ public class CommonFlows {
     }
 
     public void goToShoppingPage(){
-        goToLoginPage();
-
-        final var standardCredentials = DataGiver.getValidCredentials();
-
-        Logs.info("Se hace login");
-        new LoginPage().fillLoginForm(
-                standardCredentials.getUsername(),
-                standardCredentials.getPassword()
-        );
+        assignLoginCookie();
+        getDriver().get("https://www.saucedemo.com/inventory.html");
 
         new ShoppingPage().waitPageToLoad(); // Se espera a que cargue la pagina de shopping
     }
