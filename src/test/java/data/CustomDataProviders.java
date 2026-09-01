@@ -12,10 +12,14 @@ public class CustomDataProviders {
     public Object[][] credentialsDataProvider(){
         final var locked = DataGiver.getLockedCredentials();
         final var unexistent = DataGiver.getUnexistentCredentials();
+        final var withoutUsername = DataGiver.getNoUsernameCredentials();
+        final var withoutPassword = DataGiver.getNoPasswordCredentials();
 
         return new Object[][]{
                 {locked.getUsername(), locked.getPassword(), locked.getMessage()},
-                {unexistent.getUsername(), unexistent.getPassword(), unexistent.getMessage()}
+                {unexistent.getUsername(), unexistent.getPassword(), unexistent.getMessage()},
+                {withoutUsername.getUsername(), withoutUsername.getPassword(), withoutUsername.getMessage()},
+                {withoutPassword.getUsername(), withoutPassword.getPassword(), withoutPassword.getMessage()}
         };
     }
 
