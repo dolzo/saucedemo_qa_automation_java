@@ -14,6 +14,16 @@
       "username": "hello_world",
       "password": "secret_passsword",
       "message": "Epic sadface: Username and password do not match any user in this service"
+    },
+    "withoutUsername": {
+      "username": "",
+      "password": "secret_sauce",
+      "message": "Epic sadface: Username is required"
+    },
+    "withoutPassword": {
+      "username": "standard_user",
+      "password": "",
+      "message": "Epic sadface: Password is required"
     }
   }
 }
