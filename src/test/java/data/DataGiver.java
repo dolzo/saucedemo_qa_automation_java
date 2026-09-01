@@ -20,6 +20,14 @@ public class DataGiver {
         return getCredentialsMap().get("locked");
     }
 
+    public static Credential getNoUsernameCredentials(){
+        return getCredentialsMap().get("withoutUsername");
+    }
+
+    public static Credential getNoPasswordCredentials(){
+        return getCredentialsMap().get("withoutPassword");
+    }
+
     public static Credential getUnexistentCredentials(){
         return getCredentialsMap().get("unexistent");
     }
