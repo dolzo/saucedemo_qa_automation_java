@@ -43,4 +43,10 @@ public class ItemDetailPage extends BasePage {
         Logs.info("Haciendo clic en back to products");
         find(backToProductsButton).click();
     }
+
+    @Step("Haciendo clic en add to cart")
+    public void clickAddToCart(){
+        Logs.info("Haciendo clic en add to cart");
+        find(addToCartButton).click();
+    }
 }
