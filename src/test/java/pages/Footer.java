@@ -15,43 +15,48 @@ public class Footer extends BasePage {
     @Step("Verificando el footer")
     public void verifyPage() {
         Logs.info("Verificando el footer");
-        softAssert.assertTrue(find(twitterButton).isDisplayed());
-        softAssert.assertTrue(find(facebookButton).isDisplayed());
-        softAssert.assertTrue(find(linkedinButton).isDisplayed());
-
-        softAssert.assertAll();
-
+        find(twitterButton).isDisplayed();
+        find(facebookButton).isDisplayed();
+        find(linkedinButton).isDisplayed();
     }
 
     // Depende de la pagina en donde uno se encuentra
     @Override
     public void waitPageToLoad() {}
 
-    @Step("Verificando que los links del footer sean correctos")
-    public void verifyCorrectLinks(
-            String twitterUrl,
-            String facebookUrl,
-            String linkedinUrl
-    ){
+    public boolean isTwitterDisplayed() {
+        return find(twitterButton).isDisplayed();
+    }
 
-        final var twitterLabel = find(twitterButton);
-        final var facebookLabel = find(facebookButton);
-        final var linkedinLabel = find(linkedinButton);
+    public boolean isTwitterEnabled() {
+        return find(twitterButton).isEnabled();
+    }
 
-        Logs.info("Verificando los links de redes sociales");
+    public String getTwitterUrl() {
+        return find(twitterButton).getAttribute("href");
+    }
 
-        softAssert.assertTrue(twitterLabel.isDisplayed());
-        softAssert.assertTrue(twitterLabel.isEnabled());
-        softAssert.assertEquals(twitterLabel.getAttribute("href"), twitterUrl);
+    public boolean isFacebookDisplayed() {
+        return find(facebookButton).isDisplayed();
+    }
 
-        softAssert.assertTrue(facebookLabel.isDisplayed());
-        softAssert.assertTrue(facebookLabel.isEnabled());
-        softAssert.assertEquals(facebookLabel.getAttribute("href"), facebookUrl);
+    public boolean isFacebookEnabled() {
+        return find(facebookButton).isEnabled();
+    }
 
-        softAssert.assertTrue(linkedinLabel.isDisplayed());
-        softAssert.assertTrue(linkedinLabel.isEnabled());
-        softAssert.assertEquals(linkedinLabel.getAttribute("href"), linkedinUrl);
+    public String getFacebookUrl() {
+        return find(facebookButton).getAttribute("href");
+    }
 
-        softAssert.assertAll();
+    public boolean isLinkedinDisplayed() {
+        return find(linkedinButton).isDisplayed();
+    }
+
+    public boolean isLinkedinEnabled() {
+        return find(linkedinButton).isEnabled();
+    }
+
+    public String getLinkedinUrl() {
+        return find(linkedinButton).getAttribute("href");
     }
 }

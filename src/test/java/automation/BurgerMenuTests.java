@@ -38,7 +38,11 @@ public class BurgerMenuTests extends BaseTest {
     @Severity(SeverityLevel.MINOR)
     public void verifyLinkAboutButton(){
 
-        burgerMenu.verifyAboutButtonUrl("https://saucelabs.com/");
+        softAssert.assertTrue(burgerMenu.isAboutButtonDisplayed());
+        softAssert.assertTrue(burgerMenu.isAboutButtonEnabled());
+        softAssert.assertEquals(burgerMenu.getAboutButtonHref(), "https://saucelabs.com/");
+
+        softAssert.assertAll();
 
     }
 }

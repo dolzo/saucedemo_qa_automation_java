@@ -2,8 +2,12 @@ package pages;
 
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import utilities.BasePage;
 import utilities.Logs;
+
+import java.time.Duration;
 
 public class TopBar extends BasePage {
 
@@ -19,10 +23,9 @@ public class TopBar extends BasePage {
     @Step("Verificando la barra superior")
     public void verifyPage() {
         Logs.info("Verificando la barra superior");
-        softAssert.assertTrue(find(title).isDisplayed());
-        softAssert.assertTrue(find(burgerMenu).isDisplayed());
-
-        softAssert.assertAll();
+        final var wait = new WebDriverWait(getDriver(), Duration.ofSeconds(5));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(title));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(burgerMenu));
     }
 
     @Step("Abriendo el menu hamburguesa")

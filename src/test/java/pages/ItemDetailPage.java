@@ -2,8 +2,12 @@ package pages;
 
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import utilities.BasePage;
 import utilities.Logs;
+
+import java.time.Duration;
 
 public class ItemDetailPage extends BasePage {
 
@@ -13,7 +17,6 @@ public class ItemDetailPage extends BasePage {
     private final By itemImage = By.className("inventory_details_img");
     private final By addToCartButton = By.id("add-to-cart");
     private final By backToProductsButton = By.id("back-to-products");
-
 
     @Override
     @Step("Esperando a que el detalle del producto cargue")
@@ -26,14 +29,13 @@ public class ItemDetailPage extends BasePage {
     public void verifyPage() {
         Logs.info("Verificando los detalles del producto");
 
-        softAssert.assertTrue(find(itemName).isDisplayed());
-        softAssert.assertTrue(find(itemDescription).isDisplayed());
-        softAssert.assertTrue(find(itemPrice).isDisplayed());
-        softAssert.assertTrue(find(itemImage).isDisplayed());
-        softAssert.assertTrue(find(addToCartButton).isDisplayed());
-        softAssert.assertTrue(find(backToProductsButton).isDisplayed());
-
-        softAssert.assertAll();
+        final var wait = new WebDriverWait(getDriver(), Duration.ofSeconds(5));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(itemName));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(itemDescription));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(itemPrice));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(itemImage));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(addToCartButton));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(backToProductsButton));
     }
 
     @Step("Haciendo clic en back to products")

@@ -27,10 +27,23 @@ public class FooterTests extends BaseTest {
 
         Logs.info("Se verifica que la pagina a la que redirigen los enlaces sean las correctas");
         footer.verifyPage();
-        footer.verifyCorrectLinks(
-                "https://twitter.com/saucelabs",
-                "https://www.facebook.com/saucelabs",
-                "https://www.linkedin.com/company/sauce-labs/");
 
+        final var expectedTwitterUrl = "https://twitter.com/saucelabs";
+        final var expectedFacebookUrl = "https://www.facebook.com/saucelabs";
+        final var expectedLinkedinUrl = "https://www.linkedin.com/company/sauce-labs/";
+
+        softAssert.assertTrue(footer.isTwitterDisplayed());
+        softAssert.assertTrue(footer.isTwitterEnabled());
+        softAssert.assertEquals(footer.getTwitterUrl(), expectedTwitterUrl);
+
+        softAssert.assertTrue(footer.isFacebookDisplayed());
+        softAssert.assertTrue(footer.isFacebookEnabled());
+        softAssert.assertEquals(footer.getFacebookUrl(), expectedFacebookUrl);
+
+        softAssert.assertTrue(footer.isLinkedinDisplayed());
+        softAssert.assertTrue(footer.isLinkedinEnabled());
+        softAssert.assertEquals(footer.getLinkedinUrl(), expectedLinkedinUrl);
+
+        softAssert.assertAll();
     }
 }

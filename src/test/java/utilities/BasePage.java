@@ -5,7 +5,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.asserts.SoftAssert;
 
 import java.time.Duration;
 import java.util.List;
@@ -14,11 +13,9 @@ public abstract class BasePage {
 
     private final static int defaultTimeout = 5;
     private final int timeOut;
-    protected final SoftAssert softAssert;
 
     // Constructo al que se le pasa un timeout personalizado
     public BasePage(int timeOut) {
-        softAssert = new SoftAssert();
         this.timeOut = timeOut;
     }
 

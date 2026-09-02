@@ -2,8 +2,12 @@ package pages;
 
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import utilities.BasePage;
 import utilities.Logs;
+
+import java.time.Duration;
 
 public class ShoppingCartPage extends BasePage {
 
@@ -20,10 +24,9 @@ public class ShoppingCartPage extends BasePage {
     @Step("Verificando la pagina del carrito")
     public void verifyPage() {
         Logs.info("Verificando la pagina del carrito");
-        softAssert.assertTrue(find(continueShopping).isDisplayed());
-        softAssert.assertTrue(find(checkout).isDisplayed());
-
-        softAssert.assertAll();
+        final var wait = new WebDriverWait(getDriver(), Duration.ofSeconds(5));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(continueShopping));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(checkout));
     }
 
     @Step("Haciendo clic en el boton checkout")

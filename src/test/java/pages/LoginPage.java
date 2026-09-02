@@ -12,7 +12,6 @@ public class LoginPage extends BasePage {
     private final By loginButton = By.id("login-button");
     private final By errorMessage = By.cssSelector("h3[data-test='error']");
 
-
     @Override
     @Step("Esperando a que cargue la pagina de login")
     public void waitPageToLoad() {
@@ -22,13 +21,30 @@ public class LoginPage extends BasePage {
     @Override
     @Step("Verificando la pagina de login")
     public void verifyPage() {
-
         Logs.info("Verificando la pagina de login");
-        softAssert.assertTrue(find(usernameInput).isDisplayed());
-        softAssert.assertTrue(find(passwordInput).isDisplayed());
-        softAssert.assertTrue(find(loginButton).isDisplayed());
+        waitPage(usernameInput, "Username Input");
+        waitPage(passwordInput, "Password Input");
+        waitPage(loginButton, "Login Button");
+    }
 
-        softAssert.assertAll();
+    public boolean isUsernameInputDisplayed() {
+        return find(usernameInput).isDisplayed();
+    }
+
+    public boolean isPasswordInputDisplayed() {
+        return find(passwordInput).isDisplayed();
+    }
+
+    public boolean isLoginButtonDisplayed() {
+        return find(loginButton).isDisplayed();
+    }
+
+    public boolean isErrorMessageDisplayed() {
+        return find(errorMessage).isDisplayed();
+    }
+
+    public String getErrorMessageText() {
+        return find(errorMessage).getText();
     }
 
     @Step("Rellenando el formulario de login")
@@ -41,23 +57,5 @@ public class LoginPage extends BasePage {
 
         Logs.info("Haciendo clic en el boton de login");
         find(loginButton).click();
-    }
-
-    @Step("Verificando el mensaje de error")
-    public void verifyErrorMessage(String expectedMessage){
-        Logs.info("Obteniendo el elemento del mensaje de error");
-        final var errorLabel = find(errorMessage);
-
-        Logs.info("Verificando el mensaje de error");
-        softAssert.assertTrue(errorLabel.isDisplayed(), "El mensaje de error no se encuentra visible");
-
-        softAssert.assertEquals(
-                errorLabel.getText(),
-                expectedMessage,
-                "El mensaje de error no coincide con el esperado."
-        );
-
-
-        softAssert.assertAll();
     }
 }

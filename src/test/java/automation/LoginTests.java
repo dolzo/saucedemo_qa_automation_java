@@ -25,6 +25,12 @@ public class LoginTests extends BaseTest {
     public void verifyLoginPage(){
         Logs.info("Se verifica la pagina de login");
         loginPage.verifyPage();
+
+        softAssert.assertTrue(loginPage.isUsernameInputDisplayed(), "El input de usuario no está visible");
+        softAssert.assertTrue(loginPage.isPasswordInputDisplayed(), "El input de password no está visible");
+        softAssert.assertTrue(loginPage.isLoginButtonDisplayed(), "El boton de login no está visible");
+
+        softAssert.assertAll();
     }
 
     @Test(
@@ -36,6 +42,10 @@ public class LoginTests extends BaseTest {
     @Severity(SeverityLevel.CRITICAL)
     public void credentialsTest(String username, String password, String message){
         loginPage.fillLoginForm(username, password);
-        loginPage.verifyErrorMessage(message);
+
+        softAssert.assertTrue(loginPage.isErrorMessageDisplayed(), "El mensaje de error no se encuentra visible");
+        softAssert.assertEquals(loginPage.getErrorMessageText(), message, "El mensaje de error no coincide con el esperado.");
+
+        softAssert.assertAll();
     }
 }

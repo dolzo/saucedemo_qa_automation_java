@@ -11,11 +11,12 @@ import utilities.BaseTest;
 
 public class YourInformationTests extends BaseTest {
 
-    private final YourInformationPage yourInformationPage = new YourInformationPage();
+    private YourInformationPage yourInformationPage;
 
     @BeforeMethod(alwaysRun = true)
     public void setUp() {
         commonFlows.goToYourInformationPage();
+        yourInformationPage = new YourInformationPage();
     }
 
     @Test(groups = {regression},
@@ -30,6 +31,10 @@ public class YourInformationTests extends BaseTest {
             String errorMessage
     ) {
         yourInformationPage.fillCheckoutInputs(name, lastName, postalCode);
-        yourInformationPage.verifyErrorMessage(errorMessage);
+
+        softAssert.assertTrue(yourInformationPage.isErrorMessageDisplayed(), "El mensaje de error no esta visible");
+        softAssert.assertEquals(yourInformationPage.getErrorMessageText(), errorMessage, "El texto del mensaje de error no coincide");
+
+        softAssert.assertAll();
     }
 }

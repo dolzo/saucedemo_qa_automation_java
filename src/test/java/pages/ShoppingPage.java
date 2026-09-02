@@ -1,19 +1,22 @@
 package pages;
 
 import io.qameta.allure.Step;
-import models.ProductItem;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.locators.RelativeLocator;
+import org.openqa.selenium.support.ui.Select;
 import utilities.BasePage;
 import utilities.Logs;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ShoppingPage extends BasePage {
 
     private final By inventoryList = By.className("inventory_list");
     private final By productsTitle = By.cssSelector("span[data-test='title']");
     private final By selectItem = By.cssSelector("select[data-test='product-sort-container']");
+    private final By itemNames = By.className("inventory_item_name");
 
     private By getProductPrice(String itemName){
         return RelativeLocator
@@ -38,11 +41,9 @@ public class ShoppingPage extends BasePage {
     public void verifyPage() {
 
         Logs.info("Verificando la pagina de shopping");
-        softAssert.assertTrue(find(inventoryList).isDisplayed());
-        softAssert.assertTrue(find(productsTitle).isDisplayed());
-        softAssert.assertTrue(find(selectItem).isDisplayed());
-
-        softAssert.assertAll();
+        waitPage(inventoryList, "Inventory List");
+        waitPage(productsTitle, "Products Title");
+        waitPage(selectItem, "Select Item");
     }
 
     @Step("Yendo hacia los detalles de un producto")
@@ -52,21 +53,27 @@ public class ShoppingPage extends BasePage {
 
     }
 
-    @Step("Verificando el precio de los productos")
-    public void verifyItemsPrice(List<ProductItem> itemList){
-        Logs.info("Verificando el precio de los productos");
+    @Step("Obteniendo el precio del producto: {itemName}")
+    public String getItemPrice(String itemName){
+        final var priceLocator = getProductPrice(itemName);
+        return find(priceLocator).getText().replace("$", "").trim();
+    }
 
-        for(var item: itemList){
-            final var priceLocator = getProductPrice(item.getNombre());
-            final var itemPrice = find(priceLocator).getText().replace("$", "").trim();
+    @Step("Seleccionando el ordenamiento por el valor {valueText}")
+    public void selectSortOption(String valueText){
+        Logs.info("Seleccionando el ordenamiento por el valor %s", valueText);
+        Select sortDropdown = new Select(find(selectItem));
+        sortDropdown.selectByValue(valueText);
 
-            softAssert.assertEquals(
-                    itemPrice, // precio actual
-                    item.getPrecio() // precio esperado
-            );
+    }
 
-        }
+    @Step("Recuperando la lista de los productos")
+    public List<String> getAllItemNames(){
+        Logs.info("Recuperando la lista de los productos");
+        List<WebElement> elements = findAll(itemNames);
 
-        softAssert.assertAll();
+        return elements.stream()
+                .map(WebElement::getText)
+                .collect(Collectors.toList());
     }
 }

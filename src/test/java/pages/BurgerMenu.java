@@ -31,10 +31,9 @@ public class BurgerMenu extends BasePage {
     @Step("Verificando el menu hamburguesa")
     public void verifyPage() {
         Logs.info("Verificando el menu hamburguesa");
-        softAssert.assertTrue(find(logoutButton).isDisplayed());
-        softAssert.assertTrue(find(aboutButton).isDisplayed());
-
-        softAssert.assertAll();
+        final var wait = new WebDriverWait(getDriver(), Duration.ofSeconds(3));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(logoutButton));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(aboutButton));
     }
 
     @Step("Haciendo clic en el boton de logout")
@@ -43,15 +42,16 @@ public class BurgerMenu extends BasePage {
         find(logoutButton).click();
     }
 
-    @Step("Verificando el boton about")
-    public void verifyAboutButtonUrl(String expectedUrl){
-        Logs.info("Verificando el boton about");
-        softAssert.assertTrue(find(aboutButton).isDisplayed());
-        softAssert.assertTrue(find(aboutButton).isEnabled());
-        softAssert.assertEquals(find(aboutButton).getAttribute("href"), expectedUrl);
+    public boolean isAboutButtonDisplayed() {
+        return find(aboutButton).isDisplayed();
+    }
 
-        softAssert.assertAll();
+    public boolean isAboutButtonEnabled() {
+        return find(aboutButton).isEnabled();
+    }
 
+    public String getAboutButtonHref() {
+        return find(aboutButton).getAttribute("href");
     }
 
 }
