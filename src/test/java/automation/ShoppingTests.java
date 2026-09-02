@@ -1,5 +1,6 @@
 package automation;
 
+import data.CustomDataProviders;
 import data.ExcelReader;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
@@ -11,6 +12,7 @@ import utilities.BaseTest;
 import utilities.Logs;
 
 import java.util.Comparator;
+import java.util.List;
 
 public class ShoppingTests extends BaseTest {
 
@@ -46,20 +48,26 @@ public class ShoppingTests extends BaseTest {
         softAssert.assertAll();
     }
 
-    @Test(groups = {regression, smoke})
+    @Test(
+            groups = {regression, smoke},
+            dataProvider = CustomDataProviders.DP_SORT_VALUES_NAME,
+            dataProviderClass = CustomDataProviders.class
+    )
     @Description("Se verifica el correcto funcionamiento de la opción para ordenar los items en base a su nombre")
     @Severity(SeverityLevel.NORMAL)
-    public void itemListSortTest(){
-        Logs.info("Seleccionar el ordenamiento de Z -> A");
-        shoppingPage.selectSortOption("za");
+    public void itemListSortNameTest(String sortOption, Comparator<String> comparator){
+        Logs.info("Seleccionar el ordenamiento: %s", sortOption);
+        shoppingPage.selectSortOption(sortOption);
 
+        Logs.info("Recogiendo items actuales");
         final var actualItemNames = shoppingPage.getAllItemNames();
 
+        Logs.info("Recogiendo items con el filtro de ordenado");
         final var expectedProductNames = actualItemNames.stream()
-                .sorted(Comparator.reverseOrder())
+                .sorted(comparator)
                 .toList();
 
-
+        Logs.info("Validando el resultado");
         softAssert.assertEquals(
                 actualItemNames,
                 expectedProductNames
