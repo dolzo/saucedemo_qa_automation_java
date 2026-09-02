@@ -8,6 +8,7 @@ import org.openqa.selenium.support.ui.Select;
 import utilities.BasePage;
 import utilities.Logs;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -17,6 +18,7 @@ public class ShoppingPage extends BasePage {
     private final By productsTitle = By.cssSelector("span[data-test='title']");
     private final By selectItem = By.cssSelector("select[data-test='product-sort-container']");
     private final By itemNames = By.className("inventory_item_name");
+    private final By itemPrices = By.className("inventory_item_price");
 
     private By getProductPrice(String itemName){
         return RelativeLocator
@@ -75,5 +77,19 @@ public class ShoppingPage extends BasePage {
         return elements.stream()
                 .map(WebElement::getText)
                 .collect(Collectors.toList());
+    }
+
+    public List<Double> getAllItemPrices(){
+        Logs.info("Recuperando la lista de los precios de los productos");
+        List<WebElement> elements = findAll(itemPrices);
+        List<Double> prices = new ArrayList<>();
+
+        Logs.info("Remover el signo $ de los precios");
+        for (WebElement element : elements) {
+            final var price = Double.parseDouble(element.getText().replace("$", ""));
+            prices.add(price);
+        }
+
+        return prices;
     }
 }
