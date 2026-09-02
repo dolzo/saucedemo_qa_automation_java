@@ -76,4 +76,33 @@ public class ShoppingTests extends BaseTest {
         softAssert.assertAll();
 
     }
+
+    @Test(
+            groups = {regression, smoke},
+            dataProvider = CustomDataProviders.DP_SORT_VALUES_PRICE,
+            dataProviderClass = CustomDataProviders.class
+    )
+    @Description("Se verifica el correcto funcionamiento de la opción para ordenar los items en base a su precio")
+    @Severity(SeverityLevel.NORMAL)
+    public void itemListSortPriceTest(String sortOption, Comparator<Double> comparator){
+        Logs.info("Seleccionar el ordenamiento: %s", sortOption);
+        shoppingPage.selectSortOption(sortOption);
+
+        Logs.info("Recogiendo items actuales");
+        final var actualItemPrices = shoppingPage.getAllItemPrices();
+
+        Logs.info("Recogiendo items con el filtro de ordenado por precio");
+        final var expectedItemPrices = actualItemPrices.stream()
+                        .sorted(comparator)
+                        .toList();
+
+        Logs.info("Validando resultados");
+        softAssert.assertEquals(
+                actualItemPrices,
+                expectedItemPrices
+        );
+
+        softAssert.assertAll();
+
+    }
 }
