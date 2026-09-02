@@ -10,6 +10,7 @@ public class CustomDataProviders {
     public static final String DP_CREDENTIALS = "dpCredentials";
     public static final String DP_MESSAGES = "dpMessages";
     public static final String DP_SORT_VALUES_NAME = "dpSortValuesName";
+    public static final String DP_SORT_VALUES_PRICE = "dpSortValuesPrice";
 
     @DataProvider(name = DP_CREDENTIALS)
     public Object[][] credentialsDataProvider(){
@@ -44,6 +45,14 @@ public class CustomDataProviders {
         return new Object[][]{
                 {"az", Comparator.<String>naturalOrder()},
                 {"za", Comparator.<String>reverseOrder()}
+        };
+    }
+
+    @DataProvider(name = DP_SORT_VALUES_PRICE)
+    public Object[][] sortValuePriceDataProvider(){
+        return new Object[][]{
+                {"lohi", Comparator.<Double>naturalOrder()},
+                {"hilo", Comparator.<Double>reverseOrder()}
         };
     }
     
