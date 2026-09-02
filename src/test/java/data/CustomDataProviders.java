@@ -3,10 +3,13 @@ package data;
 import models.User;
 import org.testng.annotations.DataProvider;
 
+import java.util.Comparator;
+
 public class CustomDataProviders {
 
     public static final String DP_CREDENTIALS = "dpCredentials";
     public static final String DP_MESSAGES = "dpMessages";
+    public static final String DP_SORT_VALUES_NAME = "dpSortValuesName";
 
     @DataProvider(name = DP_CREDENTIALS)
     public Object[][] credentialsDataProvider(){
@@ -34,6 +37,14 @@ public class CustomDataProviders {
                 {user.getName(), user.getLastName(), "", errorMessageMap.get("error_zipcode").getMensaje()} // sin el codigo postal
         };
 
+    }
+
+    @DataProvider(name = DP_SORT_VALUES_NAME)
+    public Object[][] sortValueNameDataProvider(){
+        return new Object[][]{
+                {"az", Comparator.<String>naturalOrder()},
+                {"za", Comparator.<String>reverseOrder()}
+        };
     }
     
 }
