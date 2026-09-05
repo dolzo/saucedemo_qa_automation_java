@@ -79,6 +79,7 @@ public class ShoppingPage extends BasePage {
                 .collect(Collectors.toList());
     }
 
+    @Step("Recuperando la lista de los precios de los productos")
     public List<Double> getAllItemPrices(){
         Logs.info("Recuperando la lista de los precios de los productos");
         List<WebElement> elements = findAll(itemPrices);
@@ -92,4 +93,5 @@ public class ShoppingPage extends BasePage {
 
         return prices;
     }
+
 }
