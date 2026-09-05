@@ -13,7 +13,6 @@ import utilities.BaseTest;
 import utilities.Logs;
 
 import java.util.Comparator;
-import java.util.List;
 
 public class ShoppingTests extends BaseTest {
 
@@ -127,8 +126,9 @@ public class ShoppingTests extends BaseTest {
     @Description("Se verifica que al agregar un item al carrito despues eliminarlo de este, el contador desaparezca")
     @Severity(SeverityLevel.NORMAL)
     public void verifyRemovedItemIcon(){
-        shoppingPage.clickAddToCart();
-        shoppingPage.clickAddToCart();
+        // Se usa dos veces el metodo para hacer clic al boton porque el localizador no cambia
+        shoppingPage.clickCartButton();
+        shoppingPage.clickCartButton();
 
         softAssert.assertFalse(
                 topBar.cartBadgeNumberExist()
