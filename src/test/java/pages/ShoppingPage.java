@@ -19,7 +19,7 @@ public class ShoppingPage extends BasePage {
     private final By selectItem = By.cssSelector("select[data-test='product-sort-container']");
     private final By itemNames = By.className("inventory_item_name");
     private final By itemPrices = By.className("inventory_item_price");
-    private final By addToCartButtons = By.className("btn_inventory");
+    private final By addToCartButton = By.className("btn_inventory");
 
     private By getProductPrice(String itemName){
         return RelativeLocator
@@ -95,20 +95,11 @@ public class ShoppingPage extends BasePage {
         return prices;
     }
 
-    @Step("Haciendo clic en add to cart del primer item")
-    public void clickAddToCart(){
-        Logs.info("Haciendo clic en add to cart del primer item");
-
-        WebElement addToCart =  find(addToCartButtons);
-        addToCart.click();
-
-    }
-
     @Step("Haciendo clic en add to cart de todos los items")
     public void clickAllAddToCart(){
         Logs.info("Haciendo clic en add to cart de todos los items");
 
-        List<WebElement> addToCartList = findAll(addToCartButtons);
+        List<WebElement> addToCartList = findAll(addToCartButton);
 
         for (WebElement element : addToCartList){
             element.click();
