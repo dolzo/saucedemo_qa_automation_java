@@ -8,6 +8,7 @@ import io.qameta.allure.Description;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import pages.ShoppingPage;
+import pages.TopBar;
 import utilities.BaseTest;
 import utilities.Logs;
 
@@ -17,6 +18,7 @@ import java.util.List;
 public class ShoppingTests extends BaseTest {
 
     private final ShoppingPage shoppingPage = new ShoppingPage();
+    private final TopBar topBar = new TopBar();
 
     @BeforeMethod(alwaysRun = true)
     public void setUp() {
@@ -100,6 +102,21 @@ public class ShoppingTests extends BaseTest {
         softAssert.assertEquals(
                 actualItemPrices,
                 expectedItemPrices
+        );
+
+        softAssert.assertAll();
+
+    }
+
+    @Test(groups = {regression})
+    @Description("Se verifica que al agregar 6 productos al carrito vacio, el numero sobre el icono de este cambie a 6")
+    @Severity(SeverityLevel.MINOR)
+    public void verifySixProductIcon(){
+        shoppingPage.clickAllAddToCart();
+
+        softAssert.assertEquals(
+                topBar.getCartBadgeNumber(),
+                "6"
         );
 
         softAssert.assertAll();
