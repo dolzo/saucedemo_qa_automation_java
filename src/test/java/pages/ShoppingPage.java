@@ -95,6 +95,15 @@ public class ShoppingPage extends BasePage {
         return prices;
     }
 
+    @Step("Haciendo clic en add to cart del primer item")
+    public void clickAddToCart(){
+        Logs.info("Haciendo clic en add to cart del primer item");
+
+        WebElement addToCart =  find(addToCartButtons);
+        addToCart.click();
+
+    }
+
     @Step("Haciendo clic en add to cart de todos los items")
     public void clickAllAddToCart(){
         Logs.info("Haciendo clic en add to cart de todos los items");

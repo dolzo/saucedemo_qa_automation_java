@@ -122,4 +122,18 @@ public class ShoppingTests extends BaseTest {
         softAssert.assertAll();
 
     }
+
+    @Test(groups = {regression})
+    @Description("Se verifica que al agregar un item al carrito despues eliminarlo de este, el contador desaparezca")
+    @Severity(SeverityLevel.NORMAL)
+    public void verifyRemovedItemIcon(){
+        shoppingPage.clickAddToCart();
+        shoppingPage.clickAddToCart();
+
+        softAssert.assertFalse(
+                topBar.cartBadgeNumberExist()
+        );
+
+        softAssert.assertAll();
+    }
 }
