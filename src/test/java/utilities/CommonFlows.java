@@ -58,6 +58,13 @@ public class CommonFlows {
         new CheckoutPage().waitPageToLoad();
     }
 
+    public void goToOrderConfirmationPage(){
+        goToCheckoutPage();
+
+        new CheckoutPage().clickFinishButton();
+
+        new OrderConfirmationPage().waitPageToLoad();
+    }
 
     public void openBurgerMenu(){
         goToShoppingPage();
