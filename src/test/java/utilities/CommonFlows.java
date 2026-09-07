@@ -50,6 +50,15 @@ public class CommonFlows {
         new YourInformationPage().waitPageToLoad();
     }
 
+    public void goToCheckoutPage(){
+        goToYourInformationPage();
+
+        new YourInformationPage().fillCheckoutInputs("name", "lastname", "zip123");
+
+        new CheckoutPage().waitPageToLoad();
+    }
+
+
     public void openBurgerMenu(){
         goToShoppingPage();
 
