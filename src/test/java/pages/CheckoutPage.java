@@ -13,6 +13,7 @@ public class CheckoutPage extends BasePage {
 
 
     private final By finishButton = By.id("finish");
+    private final By cancelButton = By.id("cancel");
 
     @Override
     @Step("Esperando a que la pagina de checkout cargue")
@@ -26,6 +27,7 @@ public class CheckoutPage extends BasePage {
         Logs.info("Verificando la pagina de checkout");
         final var wait = new WebDriverWait(getDriver(), Duration.ofSeconds(5));
         wait.until(ExpectedConditions.visibilityOfElementLocated(finishButton));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(cancelButton));
 
     }
 
@@ -34,4 +36,9 @@ public class CheckoutPage extends BasePage {
         find(finishButton).click();
     }
 
+
+    @Step("Haciendo clic en el boton cancelar")
+    public void clickCancelButton() {
+        find(cancelButton).click();
+    }
 }
