@@ -45,10 +45,4 @@ public class ShoppingCartPage extends BasePage {
         find(continueShopping).click();
     }
 
-    @Test(groups = {regression})
-    @Description("")
-    @Severity(SeverityLevel.NORMAL)
-    public void verifyContinueShoppingButtonTest() {
-
-    }
 }

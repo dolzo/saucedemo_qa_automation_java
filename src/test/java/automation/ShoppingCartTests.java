@@ -8,6 +8,7 @@ import org.testng.annotations.Test;
 import pages.ShoppingCartPage;
 import pages.YourInformationPage;
 import utilities.BaseTest;
+import utilities.Logs;
 
 public class ShoppingCartTests extends BaseTest {
 
@@ -38,5 +39,12 @@ public class ShoppingCartTests extends BaseTest {
         yourInformationPage.verifyPage();
 
         softAssert.assertAll();
+    }
+
+    @Test(groups = {regression})
+    @Description("Se verifica el funcionamiento del boton para volver a la pagina principal de shopping")
+    @Severity(SeverityLevel.NORMAL)
+    public void verifyContinueShoppingButtonTest() {
+        shoppingCartPage.clickContinueShoppingButton();
     }
 }
