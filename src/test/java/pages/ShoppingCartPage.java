@@ -1,9 +1,13 @@
 package pages;
 
+import io.qameta.allure.Description;
+import io.qameta.allure.Severity;
+import io.qameta.allure.SeverityLevel;
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.annotations.Test;
 import utilities.BasePage;
 import utilities.Logs;
 
@@ -33,5 +37,18 @@ public class ShoppingCartPage extends BasePage {
     public void clickCheckoutButton(){
         Logs.info("Haciendo clic en el boton checkout");
         find(checkout).click();
+    }
+
+    @Step("Haciendo clic en el boton continue shopping")
+    public void clickContinueShoppingButton(){
+        Logs.info("Haciendo clic en el boton continue shopping");
+        find(continueShopping).click();
+    }
+
+    @Test(groups = {regression})
+    @Description("")
+    @Severity(SeverityLevel.NORMAL)
+    public void verifyContinueShoppingButtonTest() {
+
     }
 }
