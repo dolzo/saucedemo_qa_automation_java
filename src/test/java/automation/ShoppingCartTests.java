@@ -8,7 +8,6 @@ import org.testng.annotations.Test;
 import pages.ShoppingCartPage;
 import pages.YourInformationPage;
 import utilities.BaseTest;
-import utilities.Logs;
 
 public class ShoppingCartTests extends BaseTest {
 
