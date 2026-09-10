@@ -1,6 +1,8 @@
 package automation;
 
 import io.qameta.allure.Description;
+import io.qameta.allure.Severity;
+import io.qameta.allure.SeverityLevel;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import pages.ShoppingCartPage;
@@ -16,6 +18,7 @@ public class ShoppingCartTests extends BaseTest {
 
     @Test(groups = {smoke})
     @Description("Verificar carga y elementos de la pagina de carrito")
+    @Severity(SeverityLevel.NORMAL)
     public void verifyShoppingCartPageTest() {
         final var shoppingCartPage = new ShoppingCartPage();
         shoppingCartPage.verifyPage();
@@ -25,6 +28,7 @@ public class ShoppingCartTests extends BaseTest {
 
     @Test(groups = {regression})
     @Description("Verificar navegacion al checkout desde el carrito")
+    @Severity(SeverityLevel.CRITICAL)
     public void navigateToCheckoutTest() {
         final var shoppingCartPage = new ShoppingCartPage();
         shoppingCartPage.clickCheckoutButton();
