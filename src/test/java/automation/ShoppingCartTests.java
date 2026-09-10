@@ -11,6 +11,9 @@ import utilities.BaseTest;
 
 public class ShoppingCartTests extends BaseTest {
 
+    private final ShoppingCartPage shoppingCartPage = new ShoppingCartPage();
+    private final YourInformationPage yourInformationPage = new YourInformationPage();
+
     @BeforeMethod(alwaysRun = true)
     public void setUp() {
         commonFlows.goToShoppingCartPage();
@@ -20,7 +23,6 @@ public class ShoppingCartTests extends BaseTest {
     @Description("Verificar carga y elementos de la pagina de carrito")
     @Severity(SeverityLevel.NORMAL)
     public void verifyShoppingCartPageTest() {
-        final var shoppingCartPage = new ShoppingCartPage();
         shoppingCartPage.verifyPage();
 
         softAssert.assertAll();
@@ -30,10 +32,8 @@ public class ShoppingCartTests extends BaseTest {
     @Description("Verificar navegacion al checkout desde el carrito")
     @Severity(SeverityLevel.CRITICAL)
     public void navigateToCheckoutTest() {
-        final var shoppingCartPage = new ShoppingCartPage();
         shoppingCartPage.clickCheckoutButton();
 
-        final var yourInformationPage = new YourInformationPage();
         yourInformationPage.waitPageToLoad();
         yourInformationPage.verifyPage();
 
