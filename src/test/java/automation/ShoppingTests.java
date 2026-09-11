@@ -110,7 +110,7 @@ public class ShoppingTests extends BaseTest {
     @Test(groups = {regression})
     @Description("Se verifica que al agregar 6 productos al carrito vacio, el numero sobre el icono de este cambie a 6")
     @Severity(SeverityLevel.MINOR)
-    public void verifySixProductIcon(){
+    public void verifySixProductIconTest(){
         shoppingPage.clickAllAddToCart();
 
         softAssert.assertEquals(
@@ -125,7 +125,7 @@ public class ShoppingTests extends BaseTest {
     @Test(groups = {regression})
     @Description("Se verifica que al agregar un item al carrito despues eliminarlo de este, el contador desaparezca")
     @Severity(SeverityLevel.NORMAL)
-    public void verifyRemovedItemIcon(){
+    public void verifyRemovedItemIconTest(){
         // Se usa dos veces el metodo para hacer clic al boton porque el localizador no cambia
         shoppingPage.clickCartButton();
         shoppingPage.clickCartButton();
