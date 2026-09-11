@@ -77,6 +77,6 @@ public class CommonFlows {
         goToShoppingPage();
 
         new ShoppingPage().goToItemDetail(itemName);
-        new ItemDetailPage().waitPageToLoad();
+        new ProductDetailPage().waitPageToLoad();
     }
 }

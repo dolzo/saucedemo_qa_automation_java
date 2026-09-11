@@ -5,14 +5,14 @@ import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import pages.ItemDetailPage;
+import pages.ProductDetailPage;
 import pages.TopBar;
 import utilities.BaseTest;
 
 public class TopBarTests extends BaseTest {
 
     private final TopBar topBar = new TopBar();
-    private final ItemDetailPage itemDetailPage = new ItemDetailPage();
+    private final ProductDetailPage productDetailPage = new ProductDetailPage();
 
     @BeforeMethod
     public void setUp() {
@@ -23,7 +23,7 @@ public class TopBarTests extends BaseTest {
     @Description("Se verifica que al agregar un producto al carrito vacio, el numero sobre el icono de ese cambie a 1")
     @Severity(SeverityLevel.MINOR)
     public void verifyProductIcon() {
-        itemDetailPage.clickAddToCart();
+        productDetailPage.clickAddToCart();
         topBar.clickBurgerMenu();
 
         softAssert.assertEquals(

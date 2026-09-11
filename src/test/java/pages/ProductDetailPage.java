@@ -9,7 +9,7 @@ import utilities.Logs;
 
 import java.time.Duration;
 
-public class ItemDetailPage extends BasePage {
+public class ProductDetailPage extends BasePage {
 
     private final By itemName = By.className("inventory_details_name");
     private final By itemDescription = By.className("inventory_details_desc");

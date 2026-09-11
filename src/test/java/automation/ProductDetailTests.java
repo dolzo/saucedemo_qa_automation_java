@@ -5,16 +5,14 @@ import io.qameta.allure.SeverityLevel;
 import jdk.jfr.Description;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import pages.ItemDetailPage;
-import pages.LoginPage;
+import pages.ProductDetailPage;
 import pages.ShoppingPage;
 import utilities.BaseTest;
-import utilities.Logs;
 
-public class ItemDetailTests extends BaseTest {
+public class ProductDetailTests extends BaseTest {
 
     private final ShoppingPage shoppingPage = new ShoppingPage();
-    private final ItemDetailPage itemDetailPage = new ItemDetailPage();
+    private final ProductDetailPage productDetailPage = new ProductDetailPage();
 
     @BeforeMethod(alwaysRun = true)
     public void setUp() {
@@ -26,7 +24,7 @@ public class ItemDetailTests extends BaseTest {
     @Severity(SeverityLevel.CRITICAL)
     public void verifyItemDetailTest() {
 
-        itemDetailPage.verifyPage();
+        productDetailPage.verifyPage();
     }
 
     @Test(groups = {regression, smoke})
@@ -34,7 +32,7 @@ public class ItemDetailTests extends BaseTest {
     @Severity(SeverityLevel.CRITICAL)
     public void verifyBackToProductsButton() {
 
-        itemDetailPage.clickBackToProducts();
+        productDetailPage.clickBackToProducts();
         shoppingPage.waitPageToLoad();
         shoppingPage.verifyPage();
 
