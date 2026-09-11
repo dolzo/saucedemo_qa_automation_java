@@ -16,7 +16,7 @@ public class TopBarTests extends BaseTest {
 
     @BeforeMethod
     public void setUp() {
-        commonFlows.goToItemDetail("Sauce Labs Fleece Jacket");
+        commonFlows.goToProductDetail("Sauce Labs Fleece Jacket");
     }
 
     @Test(groups = {regression})

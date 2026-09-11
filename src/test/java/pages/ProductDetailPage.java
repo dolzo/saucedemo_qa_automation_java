@@ -11,17 +11,17 @@ import java.time.Duration;
 
 public class ProductDetailPage extends BasePage {
 
-    private final By itemName = By.className("inventory_details_name");
-    private final By itemDescription = By.className("inventory_details_desc");
-    private final By itemPrice = By.className("inventory_details_price");
-    private final By itemImage = By.className("inventory_details_img");
+    private final By productName = By.className("inventory_details_name");
+    private final By productDescription = By.className("inventory_details_desc");
+    private final By productPrice = By.className("inventory_details_price");
+    private final By productImage = By.className("inventory_details_img");
     private final By addToCartButton = By.id("add-to-cart");
     private final By backToProductsButton = By.id("back-to-products");
 
     @Override
     @Step("Esperando a que el detalle del producto cargue")
     public void waitPageToLoad() {
-        waitPage(itemDescription, this.getClass().getSimpleName());
+        waitPage(productDescription, this.getClass().getSimpleName());
     }
 
     @Override
@@ -30,10 +30,10 @@ public class ProductDetailPage extends BasePage {
         Logs.info("Verificando los detalles del producto");
 
         final var wait = new WebDriverWait(getDriver(), Duration.ofSeconds(5));
-        wait.until(ExpectedConditions.visibilityOfElementLocated(itemName));
-        wait.until(ExpectedConditions.visibilityOfElementLocated(itemDescription));
-        wait.until(ExpectedConditions.visibilityOfElementLocated(itemPrice));
-        wait.until(ExpectedConditions.visibilityOfElementLocated(itemImage));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(productName));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(productDescription));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(productPrice));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(productImage));
         wait.until(ExpectedConditions.visibilityOfElementLocated(addToCartButton));
         wait.until(ExpectedConditions.visibilityOfElementLocated(backToProductsButton));
     }

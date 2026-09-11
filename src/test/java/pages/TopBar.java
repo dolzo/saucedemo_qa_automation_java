@@ -48,7 +48,7 @@ public class TopBar extends BasePage {
         return find(shoppingCartBadge).getText();
     }
 
-    @Step("Revisando si el numero de items en el icono del carrito existe")
+    @Step("Revisando si el numero de productos en el icono del carrito existe")
     public boolean cartBadgeNumberExist(){
         return !find(shoppingCartContainer).findElements(shoppingCartBadge).isEmpty();
     }

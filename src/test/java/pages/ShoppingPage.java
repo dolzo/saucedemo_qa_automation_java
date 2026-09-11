@@ -16,20 +16,20 @@ public class ShoppingPage extends BasePage {
 
     private final By inventoryList = By.className("inventory_list");
     private final By productsTitle = By.cssSelector("span[data-test='title']");
-    private final By selectItem = By.cssSelector("select[data-test='product-sort-container']");
-    private final By itemNames = By.className("inventory_item_name");
-    private final By itemPrices = By.className("inventory_item_price");
+    private final By selectProduct = By.cssSelector("select[data-test='product-sort-container']");
+    private final By productNames = By.className("inventory_item_name");
+    private final By productPrices = By.className("inventory_item_price");
     private final By addToCartButton = By.className("btn_inventory");
 
-    private By getProductPrice(String itemName){
+    private By getProductPriceLocator(String productName){
         return RelativeLocator
                 .with(By.className("inventory_item_price"))
-                .below(getItemName(itemName));
+                .below(getProductName(productName));
 
     }
 
-    private By getItemName(String itemName){
-        final var xpath = String.format("//div[text()='%s']", itemName);
+    private By getProductName(String productName){
+        final var xpath = String.format("//div[text()='%s']", productName);
         return By.xpath(xpath);
     }
 
@@ -46,34 +46,34 @@ public class ShoppingPage extends BasePage {
         Logs.info("Verificando la pagina de shopping");
         waitPage(inventoryList, "Inventory List");
         waitPage(productsTitle, "Products Title");
-        waitPage(selectItem, "Select Item");
+        waitPage(selectProduct, "Select Product");
     }
 
     @Step("Yendo hacia los detalles de un producto")
-    public void goToItemDetail(String itemName){
-        Logs.info("Yendo hacia los detalles del producto %s", itemName);
-        find(getItemName(itemName)).click();
+    public void goToProductDetail(String productName){
+        Logs.info("Yendo hacia los detalles del producto %s", productName);
+        find(getProductName(productName)).click();
 
     }
 
-    @Step("Obteniendo el precio del producto: {itemName}")
-    public String getItemPrice(String itemName){
-        final var priceLocator = getProductPrice(itemName);
+    @Step("Obteniendo el precio del producto: {productName}")
+    public String getProductPrice(String productName){
+        final var priceLocator = getProductPriceLocator(productName);
         return find(priceLocator).getText().replace("$", "").trim();
     }
 
     @Step("Seleccionando el ordenamiento por el valor {valueText}")
     public void selectSortOption(String valueText){
         Logs.info("Seleccionando el ordenamiento por el valor %s", valueText);
-        Select sortDropdown = new Select(find(selectItem));
+        Select sortDropdown = new Select(find(selectProduct));
         sortDropdown.selectByValue(valueText);
 
     }
 
     @Step("Recuperando la lista de los productos")
-    public List<String> getAllItemNames(){
+    public List<String> getAllProductNames(){
         Logs.info("Recuperando la lista de los productos");
-        List<WebElement> elements = findAll(itemNames);
+        List<WebElement> elements = findAll(productNames);
 
         return elements.stream()
                 .map(WebElement::getText)
@@ -81,9 +81,9 @@ public class ShoppingPage extends BasePage {
     }
 
     @Step("Recuperando la lista de los precios de los productos")
-    public List<Double> getAllItemPrices(){
+    public List<Double> getAllProductPrices(){
         Logs.info("Recuperando la lista de los precios de los productos");
-        List<WebElement> elements = findAll(itemPrices);
+        List<WebElement> elements = findAll(productPrices);
         List<Double> prices = new ArrayList<>();
 
         Logs.info("Remover el signo $ de los precios");
@@ -95,18 +95,18 @@ public class ShoppingPage extends BasePage {
         return prices;
     }
 
-    @Step("Haciendo clic en add to cart del primer item")
+    @Step("Haciendo clic en add to cart del primer producto")
     public void clickCartButton(){
-        Logs.info("Haciendo clic en add to cart del primer item");
+        Logs.info("Haciendo clic en add to cart del primer producto");
 
         WebElement addToCart = find(addToCartButton);
         addToCart.click();
 
     }
 
-    @Step("Haciendo clic en add to cart de todos los items")
+    @Step("Haciendo clic en add to cart de todos los productos")
     public void clickAllAddToCart(){
-        Logs.info("Haciendo clic en add to cart de todos los items");
+        Logs.info("Haciendo clic en add to cart de todos los productos");
 
         List<WebElement> addToCartList = findAll(addToCartButton);
 

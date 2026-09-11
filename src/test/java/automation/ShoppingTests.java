@@ -33,16 +33,16 @@ public class ShoppingTests extends BaseTest {
     }
 
     @Test(groups = {regression})
-    @Description("Se verifica que los precios de los items listados correspondan a los de la lista de Excel")
+    @Description("Se verifica que los precios de los productos listados correspondan a los de la lista de Excel")
     @Severity(SeverityLevel.NORMAL)
-    public void itemListPriceTest(){
-        final var itemList = ExcelReader.readProductListExcel();
+    public void productListPriceTest(){
+        final var productList = ExcelReader.readProductListExcel();
 
-        for (var item : itemList) {
-            final var actualPrice = shoppingPage.getItemPrice(item.getNombre());
+        for (var product : productList) {
+            final var actualPrice = shoppingPage.getProductPrice(product.getNombre());
             softAssert.assertEquals(
                     actualPrice, // precio actual
-                    item.getPrecio() // precio esperado
+                    product.getPrecio() // precio esperado
             );
         }
 
@@ -54,23 +54,23 @@ public class ShoppingTests extends BaseTest {
             dataProvider = CustomDataProviders.DP_SORT_VALUES_NAME,
             dataProviderClass = CustomDataProviders.class
     )
-    @Description("Se verifica el correcto funcionamiento de la opción para ordenar los items en base a su nombre")
+    @Description("Se verifica el correcto funcionamiento de la opción para ordenar los productos en base a su nombre")
     @Severity(SeverityLevel.NORMAL)
-    public void itemListSortNameTest(String sortOption, Comparator<String> comparator){
+    public void productListSortNameTest(String sortOption, Comparator<String> comparator){
         Logs.info("Seleccionar el ordenamiento: %s", sortOption);
         shoppingPage.selectSortOption(sortOption);
 
         Logs.info("Recogiendo items actuales");
-        final var actualItemNames = shoppingPage.getAllItemNames();
+        final var actualProductNames = shoppingPage.getAllProductNames();
 
         Logs.info("Recogiendo items con el filtro de ordenado");
-        final var expectedProductNames = actualItemNames.stream()
+        final var expectedProductNames = actualProductNames.stream()
                 .sorted(comparator)
                 .toList();
 
         Logs.info("Validando el resultado");
         softAssert.assertEquals(
-                actualItemNames,
+                actualProductNames,
                 expectedProductNames
         );
 
@@ -85,22 +85,22 @@ public class ShoppingTests extends BaseTest {
     )
     @Description("Se verifica el correcto funcionamiento de la opción para ordenar los items en base a su precio")
     @Severity(SeverityLevel.NORMAL)
-    public void itemListSortPriceTest(String sortOption, Comparator<Double> comparator){
+    public void productListSortPriceTest(String sortOption, Comparator<Double> comparator){
         Logs.info("Seleccionar el ordenamiento: %s", sortOption);
         shoppingPage.selectSortOption(sortOption);
 
         Logs.info("Recogiendo items actuales");
-        final var actualItemPrices = shoppingPage.getAllItemPrices();
+        final var actualProductPrices = shoppingPage.getAllProductPrices();
 
         Logs.info("Recogiendo items con el filtro de ordenado por precio");
-        final var expectedItemPrices = actualItemPrices.stream()
+        final var expectedProductPrices = actualProductPrices.stream()
                         .sorted(comparator)
                         .toList();
 
         Logs.info("Validando resultados");
         softAssert.assertEquals(
-                actualItemPrices,
-                expectedItemPrices
+                actualProductPrices,
+                expectedProductPrices
         );
 
         softAssert.assertAll();
@@ -125,7 +125,7 @@ public class ShoppingTests extends BaseTest {
     @Test(groups = {regression})
     @Description("Se verifica que al agregar un item al carrito despues eliminarlo de este, el contador desaparezca")
     @Severity(SeverityLevel.NORMAL)
-    public void verifyRemovedItemIconTest(){
+    public void verifyRemovedProductIconTest(){
         // Se usa dos veces el metodo para hacer clic al boton porque el localizador no cambia
         shoppingPage.clickCartButton();
         shoppingPage.clickCartButton();

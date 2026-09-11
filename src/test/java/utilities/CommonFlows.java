@@ -73,10 +73,10 @@ public class CommonFlows {
         new BurgerMenu().waitPageToLoad();
     }
 
-    public void goToItemDetail(String itemName){
+    public void goToProductDetail(String productName){
         goToShoppingPage();
 
-        new ShoppingPage().goToItemDetail(itemName);
+        new ShoppingPage().goToProductDetail(productName);
         new ProductDetailPage().waitPageToLoad();
     }
 }

@@ -16,13 +16,13 @@ public class ProductDetailTests extends BaseTest {
 
     @BeforeMethod(alwaysRun = true)
     public void setUp() {
-        commonFlows.goToItemDetail("Sauce Labs Fleece Jacket");
+        commonFlows.goToProductDetail("Sauce Labs Fleece Jacket");
     }
 
     @Test(groups = {regression})
     @Description("Se verifican los elementos de la pagina de un producto")
     @Severity(SeverityLevel.CRITICAL)
-    public void verifyItemDetailTest() {
+    public void verifyProductDetailTest() {
 
         productDetailPage.verifyPage();
     }
