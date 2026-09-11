@@ -6,8 +6,6 @@ import io.qameta.allure.SeverityLevel;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import pages.Footer;
-import pages.LoginPage;
-import pages.ShoppingPage;
 import utilities.BaseTest;
 import utilities.Logs;
 
