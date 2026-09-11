@@ -7,7 +7,7 @@ import utilities.Logs;
 
 public class Footer extends BasePage {
 
-    private final By twitterButton = By.cssSelector("a[data-test='social-twitter']");
+    private final By twitterButton = By.cssSelector("a[data-test='social-x']");
     private final By facebookButton = By.cssSelector("a[data-test='social-facebook']");
     private final By linkedinButton = By.cssSelector("a[data-test='social-linkedin']");
 

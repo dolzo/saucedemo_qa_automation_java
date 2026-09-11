@@ -28,7 +28,7 @@ public class FooterTests extends BaseTest {
         Logs.info("Se verifica que la pagina a la que redirigen los enlaces sean las correctas");
         footer.verifyPage();
 
-        final var expectedTwitterUrl = "https://twitter.com/saucelabs";
+        final var expectedTwitterUrl = "https://x.com/saucelabs";
         final var expectedFacebookUrl = "https://www.facebook.com/saucelabs";
         final var expectedLinkedinUrl = "https://www.linkedin.com/company/sauce-labs/";
 
