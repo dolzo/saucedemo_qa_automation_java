@@ -2,6 +2,7 @@ package automation;
 
 import data.CustomDataProviders;
 import data.ExcelReader;
+import data.JsonReader;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
 import io.qameta.allure.Description;
@@ -133,6 +134,30 @@ public class ShoppingTests extends BaseTest {
         softAssert.assertFalse(
                 topBar.cartBadgeNumberExist()
         );
+
+        softAssert.assertAll();
+    }
+
+    @Test(groups = {regression})
+    @Description("Se verifica que las URLs de las imagenes de la pagina sean correctas")
+    @Severity(SeverityLevel.MINOR)
+    public void verifyImageUrlTest() {
+        Logs.info("Cargando mapa esperado de imágenes desde el archivo JSON");
+        final var expectedImageMap = JsonReader.getJsonProductImageMap().getProductImageMap();
+
+        for (var entry : expectedImageMap.values()) {
+            final var productName = entry.getName();
+            final var expectedFullUrl = "https://www.saucedemo.com" + entry.getUrl();
+
+            Logs.info("Verificando la URL de la imagen del producto: %s", productName);
+            final var actualImageUrl = shoppingPage.getProductImageUrl(productName);
+
+            softAssert.assertEquals(
+                    actualImageUrl,
+                    expectedFullUrl,
+                    String.format("Fallo en la imagen del producto: '%s'", productName)
+            );
+        }
 
         softAssert.assertAll();
     }
