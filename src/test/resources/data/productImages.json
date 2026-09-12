@@ -1,0 +1,28 @@
+{
+  "images": {
+    "sauce_labs_backpack": {
+      "name": "Sauce Labs Backpack",
+      "url": "/assets/sauce-backpack-1200x1500-CjRW-Djj.jpg"
+    },
+    "sauce_labs_bike_light": {
+      "name": "Sauce Labs Bike Light",
+      "url": "/assets/bike-light-1200x1500-DxcZRFOA.jpg"
+    },
+    "sauce_labs_bolt_t_shirt": {
+      "name": "Sauce Labs Bolt T-Shirt",
+      "url": "/assets/bolt-shirt-1200x1500-mR0ldpVS.jpg"
+    },
+    "sauce_labs_fleece_jacket": {
+      "name": "Sauce Labs Fleece Jacket",
+      "url": "/assets/sauce-pullover-1200x1500-BfbI-PSd.jpg"
+    },
+    "sauce_labs_onesie": {
+      "name": "Sauce Labs Onesie",
+      "url": "/assets/red-onesie-1200x1500-BrSuq0ic.jpg"
+    },
+    "test_all_the_things_t_shirt": {
+      "name": "Test.allTheThings() T-Shirt (Red)",
+      "url": "/assets/red-tatt-1200x1500-E-qp6aYf.jpg"
+    }
+  }
+}
