@@ -21,6 +21,18 @@ public class ShoppingPage extends BasePage {
     private final By productPrices = By.className("inventory_item_price");
     private final By addToCartButton = By.className("btn_inventory");
 
+    private By getProductImageLocator(String productName) {
+        // este es el localizador de la imagen en base al nombre del producto
+        final var xpath = String.format("//div[text()='%s']/ancestor::div[@class='inventory_item']//img", productName);
+        return By.xpath(xpath);
+    }
+
+    @Step("Obteniendo la URL de la imagen del producto: {productName}")
+    public String getProductImageUrl(String productName) {
+        Logs.info("Obteniendo la URL de la imagen del producto: %s", productName);
+        return find(getProductImageLocator(productName)).getAttribute("src");
+    }
+
     private By getProductPriceLocator(String productName){
         return RelativeLocator
                 .with(By.className("inventory_item_price"))
